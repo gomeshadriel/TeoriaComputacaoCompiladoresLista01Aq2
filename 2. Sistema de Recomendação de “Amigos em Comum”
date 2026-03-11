@@ -1,0 +1,40 @@
+#include <iostream>
+#include <set>
+#include <string>
+#include <algorithm>
+#include <iterator>
+
+using namespace std;
+
+int main() {
+
+    set<string> usuarioA = {"Python", "Jogos", "Música", "IA"};
+    set<string> usuarioB = {"Java", "IA", "Música", "Caminhada"};
+
+    set<string> interessesComuns;
+    set<string> sugestoesParaA;
+
+    set_intersection(
+        usuarioA.begin(), usuarioA.end(),
+        usuarioB.begin(), usuarioB.end(),
+        inserter(interessesComuns, interessesComuns.begin())
+    );
+
+    set_difference(
+        usuarioB.begin(), usuarioB.end(),
+        usuarioA.begin(), usuarioA.end(),
+        inserter(sugestoesParaA, sugestoesParaA.begin())
+    );
+
+    cout << "Interesses em comum:\n";
+    for (auto i : interessesComuns) {
+        cout << i << endl;
+    }
+
+    cout << "\nSugestoes para Usuario A:\n";
+    for (auto i : sugestoesParaA) {
+        cout << i << endl;
+    }
+
+    return 0;
+}

@@ -1,0 +1,45 @@
+#include <iostream>
+#include <set>
+#include <string>
+#include <algorithm>
+#include <iterator>
+
+using namespace std;
+
+int main() {
+
+    set<string> RH = {"ver_salario", "editar_perfil"};
+    set<string> TI = {"acesso_servidor", "editar_perfil"};
+
+    set<string> permissoesTotais;
+
+    set_union(
+        RH.begin(), RH.end(),
+        TI.begin(), TI.end(),
+        inserter(permissoesTotais, permissoesTotais.begin())
+    );
+
+    set<string> permissoesArquivo = {"ver_salario", "editar_perfil"};
+    bool podeAcessar = includes(
+        permissoesTotais.begin(), permissoesTotais.end(),
+        permissoesArquivo.begin(), permissoesArquivo.end()
+    );
+
+    cout << "Permissoes totais do funcionario:\n";
+    for (auto p : permissoesTotais) {
+        cout << p << endl;
+    }
+
+    cout << "\nPermissoes necessarias para abrir arquivo confidencial:\n";
+    for (auto p : permissoesArquivo) {
+        cout << p << endl;
+    }
+
+    if (podeAcessar) {
+        cout << "\nAcesso permitido ao arquivo confidencial\n";
+    } else {
+        cout << "\nAcesso negado ao arquivo confidencial\n";
+    }
+
+    return 0;
+}
